@@ -14,7 +14,7 @@ namespace NonOPTorches
         private static void Postfix(ref float __result)
         {
 
-            __result *= NonOPTorchesSettings.Instance.burtime;
+            __result *= NonOPTorchesSettings.Settings.options.burtime;
         }
 
     }
@@ -25,8 +25,8 @@ namespace NonOPTorches
 
         private static void Prefix(TorchItem __instance, ref TorchState newState, GearItem ___m_GearItem)
         {
-            var Settings = NonOPTorchesSettings.Instance;
-            if (___m_GearItem.GetNormalizedCondition() < (float)Settings.BreakingThreshhold/100f) if (newState == TorchState.Extinguished) newState = TorchState.BurnedOut;
+            var Settings = NonOPTorchesSettings.Settings.options;
+            if (___m_GearItem.GetNormalizedCondition() < (float)Settings.BreakingThreshhold / 100f) if (newState == TorchState.Extinguished) newState = TorchState.BurnedOut;
 
 
 
@@ -39,27 +39,27 @@ namespace NonOPTorches
     {
         private static TorchState tmpstate;
         private static bool flag;
-        private static void Prefix(TorchItem __instance, ref TorchState ___m_State, GearItem ___m_GearItem)
+        private static void Prefix(TorchItem __instance)
         {
             flag = false;
-            var Settings = NonOPTorchesSettings.Instance;
-            if (__instance.IsFresh() && ___m_GearItem.GetNormalizedCondition() < 0.5f) return;
+            var Settings = NonOPTorchesSettings.Settings.options;
+            if (__instance.IsFresh() && __instance.m_GearItem.GetNormalizedCondition() < 0.5f) return;
             if (__instance.IsIgnitedFromFire()) return;
-            if (UnityEngine.Random.Range(0f, 100f) < Settings.BaseChance - 100*(1f-___m_GearItem.GetNormalizedCondition()) * Settings.malusCondtion + (float)(GameManager.GetSkillFireStarting().GetCurrentTierNumber() * Settings.BonusSkill)) return;
-            else 
+            if (UnityEngine.Random.Range(0f, 100f) < Settings.BaseChance - 100 * (1f - __instance.m_GearItem.GetNormalizedCondition()) * Settings.malusCondtion + (float)(GameManager.GetSkillFireStarting().GetCurrentTierNumber() * Settings.BonusSkill)) return;
+            else
             {
                 flag = true;
-                tmpstate = ___m_State;
-                ___m_State = TorchState.Burning;
+                tmpstate = __instance.m_State;
+                __instance.m_State = TorchState.Burning;
             }
         }
-        private static void Postfix(TorchItem __instance, ref TorchState ___m_State)
+        private static void Postfix(TorchItem __instance)
         {
-            if(flag)
+            if (flag)
             {
-                ___m_State = tmpstate;
+                __instance.m_State = tmpstate;
             }
-            
+
         }
 
     }

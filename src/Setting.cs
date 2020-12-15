@@ -2,12 +2,11 @@
 using System;
 using System.IO;
 using System.Reflection;
-using JsonModSettings;
 using ModSettings;
 
 namespace NonOPTorches
 {
-    internal class NonOPTorchesSettings : JsonModSettingsBase<NonOPTorchesSettings>
+    internal class NonOPTorchesSettings : JsonModSettings
     {
 
         
@@ -40,11 +39,15 @@ namespace NonOPTorches
         public float burtime = 1.5f;
 
 
-
-
-        public static void OnLoad()
+        internal static class Settings
         {
-            Instance = JsonModSettingsLoader.Load<NonOPTorchesSettings>();
+            public static NonOPTorchesSettings options;
+            public static void OnLoad()
+            {
+                options = new NonOPTorchesSettings();
+                options.RefreshGUI();
+                options.AddToModSettings("None OP Torches Settings");
+            }
         }
     }
 }
