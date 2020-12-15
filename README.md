@@ -1,4 +1,4 @@
-# Non OP Torches
+# None OP Torches
 
 The goal of this mod is to make torches less OP, by adding some  custumizable Option to debuff them. For those of you how don´t like the option to take torches out the fire, to use them to make 1 match 100% succes fires.
 
