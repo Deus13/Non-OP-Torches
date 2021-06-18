@@ -1,35 +1,26 @@
-﻿using Harmony;
+﻿using HarmonyLib;
 using System;
-using UnityEngine;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace NonOPTorches
 {
     [HarmonyPatch(typeof(TorchItem), "GetModifiedBurnLifetimeMinutes")]
     internal static class TorchItem_GetModifiedBurnLifetimeMinutes
     {
-
         private static void Postfix(ref float __result)
         {
-
-            __result *= NonOPTorchesSettings.Settings.options.burtime;
+            __result *= Settings.instance.burntime;
         }
-
     }
 
     [HarmonyPatch(typeof(TorchItem), "Extinguish", new Type[] { typeof(TorchState) })]
     internal static class TorchItem_Extinguish
     {
-
-        private static void Prefix(TorchItem __instance, ref TorchState newState, GearItem ___m_GearItem)
+        private static void Prefix(TorchItem __instance, ref TorchState newState)
         {
-            var Settings = NonOPTorchesSettings.Settings.options;
-            if (___m_GearItem.GetNormalizedCondition() < (float)Settings.BreakingThreshhold / 100f) if (newState == TorchState.Extinguished) newState = TorchState.BurnedOut;
-
-
-
+            if (newState == TorchState.Extinguished && __instance.m_GearItem.GetNormalizedCondition() < (float) Settings.instance.BreakingThreshhold / 100f)
+            {
+                newState = TorchState.BurnedOut;
+            }
         }
 
     }
@@ -42,10 +33,16 @@ namespace NonOPTorches
         private static void Prefix(TorchItem __instance)
         {
             flag = false;
-            var Settings = NonOPTorchesSettings.Settings.options;
+            var settings = Settings.instance;
             if (__instance.IsFresh() && __instance.m_GearItem.GetNormalizedCondition() < 0.5f) return;
             if (__instance.IsIgnitedFromFire()) return;
-            if (UnityEngine.Random.Range(0f, 100f) < Settings.BaseChance - 100 * (1f - __instance.m_GearItem.GetNormalizedCondition()) * Settings.malusCondtion + (float)(GameManager.GetSkillFireStarting().GetCurrentTierNumber() * Settings.BonusSkill)) return;
+
+            if (UnityEngine.Random.Range(0f, 100f) <
+                settings.BaseChance - 100 * (1f - __instance.m_GearItem.GetNormalizedCondition()) * settings.malusCondtion +
+                (float) (GameManager.GetSkillFireStarting().GetCurrentTierNumber() * settings.BonusSkill))
+            {
+                return;
+            }
             else
             {
                 flag = true;
@@ -59,8 +56,6 @@ namespace NonOPTorches
             {
                 __instance.m_State = tmpstate;
             }
-
         }
-
     }
 }

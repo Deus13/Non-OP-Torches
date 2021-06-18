@@ -1,36 +1,18 @@
-﻿using UnityEngine;
+﻿using MelonLoader;
+using UnityEngine;
 
 
 namespace NonOPTorches
 {
-    public class Implementation
+    public class Implementation : MelonMod
     {
-        private const string NAME = "random-Matchboxes";
-        public static double HPnotround;
-        public static void OnLoad()
+        public static double HPnotround = 0f;
+
+        public override void OnApplicationStart()
         {
-            Log("Version " + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version);
-
-
-            HPnotround = 0f;
+            Debug.Log($"[{Info.Name}] version {Info.Version} loaded!");
+            Settings.instance.RefreshGUI();
+            Settings.instance.AddToModSettings("Non OP Torches Settings");
         }
-
-        
-       
-      
-
-      
-
-
-   
-
-
-        internal static void Log(string message)
-        {
-            Debug.Log( message);
-        }
-
-
     }
-   
 }
