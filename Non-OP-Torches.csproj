@@ -48,9 +48,7 @@
       <HintPath>F:\SteamLibrary\steamapps\common\TheLongDark\MelonLoader\Managed\Il2CppSystem.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="MelonLoader.ModHandler, Version=0.2.7.4, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>F:\SteamLibrary\steamapps\common\TheLongDark\MelonLoader\MelonLoader.ModHandler.dll</HintPath>
+    <Reference Include="MelonLoader, Version=0.4.0.0, Culture=neutral, processorArchitecture=MSIL">
       <Private>False</Private>
     </Reference>
     <Reference Include="ModSettings">
@@ -58,41 +56,21 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
     <Reference Include="UnhollowerBaseLib, Version=0.4.10.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>F:\SteamLibrary\steamapps\common\TheLongDark\MelonLoader\Managed\UnhollowerBaseLib.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnhollowerRuntimeLib, Version=0.4.10.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>F:\SteamLibrary\steamapps\common\TheLongDark\MelonLoader\Managed\UnhollowerRuntimeLib.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine">
-      <HintPath>..\..\..\..\..\Games\The Long Dark v1.55 48657\tld_Data\Managed\UnityEngine.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.CoreModule">
       <HintPath>..\..\..\..\..\Games\The Long Dark v1.55 48657\tld_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="UnityEngine.JSONSerializeModule">
-      <HintPath>..\..\..\..\..\Games\The Long Dark v1.55 48657\tld_Data\Managed\UnityEngine.JSONSerializeModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="NonOpTorchesMod.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="src\Implementation.cs" />
-    <Compile Include="src\Patch.cs" />
-    <Compile Include="src\Setting.cs" />
+    <Compile Include="src\Patches.cs" />
+    <Compile Include="src\Settings.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="README.md" />
